@@ -1,0 +1,113 @@
+body {
+	font-family: Verdana, sans-serif;
+	color:black;
+}
+
+/* center all tables by default */
+table {
+	margin: auto;
+}
+
+.prompt {
+	font-size: 15px;
+	line-height: 175%;
+}
+
+.bright {
+	color: coral;
+	font-weight: bold;
+}
+
+.row {
+   margin: 20px;
+}
+
+.meaninglogo {
+	width: 100%;
+}
+
+.button {
+	margin: 1em 0 1.25em 0;
+}
+
+.picture {
+    margin: 40px 40px 40px 40px;
+		display: inline-block;
+		padding: 35px 35px 35px 35px;
+		border: solid;
+}
+
+.picture:empty{
+    border: none;
+}
+
+.friends {
+	width: 200px;
+	padding: 20px 10px 20px 10px;
+}
+
+
+/* sliders */
+/*align the left and right labels for the sliders properly*/
+/* .ui-slider .ui-slider-handle {
+    height: 15px;
+    width: 40px;
+    padding-left: 5px; //add this
+} */
+
+.slider_table .left {
+	display: inline;
+	text-align: left;
+	float: left;
+}
+
+.slider_table .right {
+	display: inline;
+	text-align: right;
+	float: right;
+}
+
+.thin {
+	height: 50px;
+}
+
+.top {
+	top: 0%;
+	position: relative;
+}
+.bottom {
+	top: 100%;
+	position: relative;
+	transform: translateY(-200%);
+}
+
+.slider_target {
+	text-align: right;
+	padding-right: 20px;
+	/* padding-left: 20px; */
+}
+
+.ui-slider-range {
+	/* you could have a "range" which makes the slider to the left of the handle a different color from the background */
+	background: transparent;
+}
+
+/* slider width and padding */
+.slider {
+	width: 400px;
+	margin: 10px 0 10px 0;
+}
+
+.vertical_slider {
+	width: 10px;
+	height: 300px;
+	margin: 10px auto;
+}
+
+#slider_endpoint_labels {
+	height: 300px;
+}
+
+.bin_label{
+	text-align: center;
+}

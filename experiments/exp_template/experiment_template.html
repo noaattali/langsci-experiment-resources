@@ -1,0 +1,285 @@
+<!-- declare the document type as html5 -->
+<!DOCTYPE html>
+
+<!-- everything is nested in the html tag -->
+<html lang="en">
+
+    <!-- within the head tag, SPECIFY THE PATHS TO YOUR OTHER EXPERIMENT FILES (the .js and .css files), as well as utilities and libraries, the title of the webpage, preloaded images, etc. -->
+    <head>
+        <meta charset="UTF-8">
+
+        <!-- If IE use the latest rendering engine -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- Set the page to the width of the device and set the zoon level -->
+        <meta name="viewport" content="width = device-width, initial-scale = 1">
+
+        <!-- Set the title -->
+        <title>Webpage Title</title>
+
+        <!--JS-->
+        <!-- external general utilities: jquery and bootstrap 3 -->
+        <script src="../_shared/js/jquery-1.11.1.min.js "></script>
+        <script src="../_shared/full-projects/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../_shared/js/underscore-min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+        <!-- cocolab experiment logic -->
+        <script src="../_shared/js/exp-V2.js"></script>
+        <script src="../_shared/js/stream-V2.js"></script>
+
+        <!-- cocolab general utilities -->
+        <script src="../_shared/js/mmturkey.js "></script>
+        <script src="../_shared/js/browserCheck.js"></script>
+        <script src="../_shared/js/utils.js"></script>
+
+        <!--CSS: bootstrap and local-->
+        <link href="../_shared/full-projects/jquery-ui/jquery-ui.min.css" rel="stylesheet" type="text/css"/>
+        <!-- <link href="../_shared/css/cocolab-style.css" rel="stylesheet" type="text/css"/> -->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/local-style.css">
+
+        <!-- experiment file -->
+        <script src="js/templates.js"></script>
+
+        <!-- check unique turkers -->
+        <script src="../_shared/js/uniqueturker.js"></script>
+
+        <!-- preload stimuli images -->
+        <script>
+          var myimages=new Array(
+            "expt-files/images/ambeverysurface.png",
+            "expt-files/images/surfaceeverysurface.png",
+            "expt-files/images/inverseeverysurface.png",
+            "expt-files/images/ambeveryinverse.png",
+            "expt-files/images/surfaceeveryinverse.png",
+            "expt-files/images/inverseeveryinverse.png"
+          )
+
+          function preloadimages(){
+            for (i=0;i<preloadimages.arguments.length;i++){
+              myimages[i]=new Image()
+              myimages[i].src=preloadimages.arguments[i]
+              }
+              }
+        </script>
+
+    </head>
+
+    <!-- anything that users interact with goes inside the body tag -->
+    <body onload="init();">
+
+      <!-- first block: the header -->
+      <!-- fluid-width header with title (left) and progress bar (right) -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Experiment Template</a>
+                </div>
+
+                <div class="nav navbar-inner navbar-right">
+                    <div class="nav navbar-text">Progress</div>
+                    <div class="nav navbar-text text-center progress" style="width: 200px;">
+                        <div class="progress-bar" width="0%"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+      <!-- specify that it takes up middle 2/3rds of screen with a grey border -->
+      <div class="container panel panel-default col-md-8 col-md-offset-2">
+          <div class="panel-body">
+              <noscript>This task requires JavaScript.</noscript>
+
+              <!-- slide with logo, task, and legal information -->
+              <div class="slide" id="i0">
+
+                  <img class="meaninglogo img-rounded" src="expt-files/images/meaningLab.png"></img>
+
+                  <h3>Task</h3>
+
+                  <p>Brief experiment description including time estimate and thank you.</p>
+
+                  <button class="btn btn-primary" id="start_button" type="button">Start Experiment</button>
+
+                  <h4>Legal information</h4>
+
+                  <p class="small">By answering the following questions, you are participating in a study being performed by language scientists in the Department of Language Science at UC Irvine. If you have questions about this research, please contact [your name] at <a href="mailto://youremailaddress@uci.edu">youremailaddress@uci.edu</a>. You must be at least 18 years old to participate. Your participation in this research is voluntary. You may decline to answer any or all of the following questions. You may decline further participation, at any time, without adverse consequences. Your anonymity is assured; the researchers who have requested your participation will not receive any personal information about you.</p>
+
+              </div>
+
+              <!-- slide with instructions -->
+              <div class="slide text-center" id="instructions">
+
+                  <h3>Instructions</h3>
+
+                  <p>Insert text. Always place text inside an element, like this paragraph tag.</p>
+
+                  <div class="alert alert-success">
+                      <strong>One way to highlight instructions is to place them in this alert-success class.</strong>
+                  </div>
+
+                  <button class="btn btn-primary" onclick="_s.button()">Continue</button>
+
+              </div>
+
+              <!-- slide for trials asking for typed response -->
+              <div class="slide text-center" id="single_trial">
+                  <p>Here is a single trial asking for a typed response (which doesn't allow continuation to the next slide until the subject inputs something). This code is also an example of random assignment to a between-subject condition. (The two conditions here are TV show vs. book.)</p>
+
+                  <p class="row"><strong><span class="display_condition"{{}}></span></strong> Please type it here:</p>
+
+                  <input type="text" id="text_response"></input>
+
+                  <button onclick="_s.button()">Continue</button>
+
+                  <p class="err">Please write something.</p>
+              </div>
+
+              <!-- slide with a single slider -->
+              <div class="slide text-center" id="one_slider">
+                  <p>Here is how to do a single slider (that must be adjusted before continuing). This code is also an example of randomizing multiple trials in one block (3 subject/object pairs in a sentence).</p>
+
+                  <p class="bright prompt"></p>
+
+                  <table id="slider_table" class="slider_table">
+                      <tr>
+                          <td class="left">completely disagree</td>
+                          <td class="right">completely agree</td>
+                      </tr>
+                      <tr>
+                          <td colspan="2">
+                              <div id="single_slider" class="slider"></div>
+                          </td>
+                      </tr>
+                  </table>
+
+                  <div class="row">
+                      <button onclick="_s.button()">Continue</button>
+                  </div>
+
+                  <div class="err">Please adjust the slider before continuing.</div>
+
+              </div>
+
+              <!-- slide with multiple sliders -->
+              <div class="slide text-center" id="multi_slider">
+                  <p>Let's use a bunch of sliders!</p>
+
+                  <p>How likely do you think it is that someone would say each of the following?</p>
+
+                  <table id="multi_slider_table" class="slider_table">
+                      <tr>
+                        <td></td>
+                        <td class="left">very unlikely</td>
+                        <td class="right">very likely</td>
+                      </tr>
+                  </table>
+
+                  <div class="row">
+                      <button onclick="_s.button()">Continue</button>
+                  </div>
+
+                  <div class="err">Please adjust all the sliders before continuing.</div>
+              </div>
+
+
+              <!-- slide with images to click on -->
+              <div class="slide text-center" id="imagetrial">
+                  <p>Let's click on pictures!</p>
+
+                  <div class="row">
+                      <p>The following sentence was most likely said about which box of marbles?</p>
+                  </div>
+
+                  <h3 class="sentence">{{}}</h3>
+
+                  <div>
+                    <div class="picture" id="Image1"></div>
+                    <div class="picture" id="Image2"></div>
+                  </div>
+              </div>
+
+              <!-- slide with survey questions -->
+              <div class="slide" id="subj_info">
+                  <h3>Additional information</h3>
+                  <p>Answering these questions is optional, but will help us understand your answers.</p>
+
+                  <div class="form-group">
+                      <label class="form-label">Did you read the instructions and do you think you did the HIT correctly?</label>
+
+                        <div class="radio">
+                          <label><input type="radio" name="assess" value="No"/>No</label>
+                        </div>
+
+                        <div class="radio">
+                          <label><input type="radio" name="assess" value="Yes"/>Yes</label>
+                        </div>
+
+                        <div class="radio">
+                          <label><input type="radio" name="assess" value="Confused"/>I was confused</label>
+                        </div>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="gender" class="form-label">Gender:</label>
+                      <select class="form-control" name="gender" id="gender">
+                          <option value="-1"></option>
+                          <option value="0">Male</option>
+                          <option value="1">Female</option>
+                          <option value="2">Other</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="age" class="form-label">Age:</label>
+                      <input type="number" class="form-control" name="age" id="age">
+                  </div>
+
+                  <div class="form-group">
+                      <label for="education" class="form-label">Level Of Education:</label>
+              				<select class="form-control" name="education" id="education">
+                          <option value="-1"></option>
+                          <option value="0">Some High School</option>
+                          <option value="1">Graduated High School</option>
+                          <option value="2">Some College</option>
+                          <option value="3">Graduated College</option>
+                          <option value="4">Hold a higher degree</option>
+                      </select>
+                  </div>
+
+                  <div class="form-group">
+                      <label for="language" class="form-label">Native Language (the language(s) spoken at home when you were a child):</label>
+                      <input type="text" class="form-control" name="language" id="language">
+                  </div>
+
+                  <div class="form-group">
+            					<label for="enjoyment" class="form-label">Did you enjoy the hit?</label>
+            					<select class="form-control" name="enjoyment" id="enjoyment">
+                          <option value="-1"></option>
+              						<option value="0">Worse than the Average HIT</option>
+              						<option value="1">An Average HIT</option>
+              						<option value="2">Better than average HIT</option>
+            					</select>
+          				</div>
+
+                  <div class="form-group">
+            				  <label for="comments" class="form-label">We would like to know any comments you have about this experiment. Please type them here:</label>
+            				  <textarea class="form-control" rows="5" name="comments" id="comments"></textarea>
+          				</div>
+
+                  <p>Click below to submit HIT.</p>
+
+                  <p><button class="btn btn-primary" onclick="_s.submit()">Submit</button></p>
+              </div>
+
+              <!-- exit slide -->
+              <div class="slide js text-center" id="thanks">
+                  <h3>Thanks for your time!</h3>
+                  <div><img class="friends" src="expt-files/images/thanks.png"></img></div>
+              </div>
+
+          </div>
+      </div>
+    </body>
+</html>
